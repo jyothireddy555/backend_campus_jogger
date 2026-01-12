@@ -1,0 +1,16 @@
+# sensitive files
+db.php
+vendor/
+uploads/
+
+# logs
+debug.txt
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+
+composer.json
+composer.lock
+config.php

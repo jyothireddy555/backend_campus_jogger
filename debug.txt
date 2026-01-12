@@ -1,0 +1,13 @@
+Array
+(
+    [profile_image] => Array
+        (
+            [name] => 36.jpg
+            [full_path] => 36.jpg
+            [type] => application/octet-stream
+            [tmp_name] => /opt/lampp/temp/phpUWGAez
+            [error] => 0
+            [size] => 29560
+        )
+
+)
