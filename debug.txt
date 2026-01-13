@@ -1,0 +1,13 @@
+Array
+(
+    [profile_image] => Array
+        (
+            [name] => 1000305086.webp
+            [full_path] => 1000305086.webp
+            [type] => application/octet-stream
+            [tmp_name] => /opt/lampp/temp/phpeWKNKT
+            [error] => 0
+            [size] => 267212
+        )
+
+)

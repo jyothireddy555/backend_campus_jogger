@@ -14,3 +14,7 @@ Thumbs.db
 composer.json
 composer.lock
 config.php
+
+live-jog-server/node_modules
+live-jog-server/package.json
+live-jog-server/package-lock.json
