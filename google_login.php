@@ -1,18 +1,17 @@
 <?php
 require "config.php";
+require "db.php";
+require 'vendor/autoload.php';
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
-
-require 'vendor/autoload.php';
-require 'db.php';
 
 $client = new Google_Client([
   'client_id' => GOOGLE_CLIENT_ID
 ]);
 
 $id_token = $_POST['id_token'] ?? '';
-
 $payload = $client->verifyIdToken($id_token);
 
 if (!$payload) {
@@ -25,28 +24,31 @@ $name = $payload['name'];
 $email = $payload['email'];
 $google_id = $payload['sub'];
 
-/* 🔹 Check if user exists */
-$stmt = $conn->prepare("SELECT * FROM users WHERE email=?");
+/* 🔹 Check user */
+$stmt = $conn->prepare(
+  "SELECT id, name, profile_name, profile_image FROM users WHERE email=?"
+);
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows === 0) {
-  // First time login → insert
+  // First login
   $insert = $conn->prepare(
     "INSERT INTO users (google_id, name, email) VALUES (?,?,?)"
   );
   $insert->bind_param("sss", $google_id, $name, $email);
   $insert->execute();
 
-  // Create a row object manually
+  $user_id = $insert->insert_id;
+
   $row = [
+    "id" => $user_id,
     "name" => $name,
     "profile_name" => null,
     "profile_image" => null
   ];
 } else {
-  // Existing user → fetch DB row
   $row = $result->fetch_assoc();
 }
 
@@ -55,6 +57,7 @@ $displayName = $row['profile_name'] ?: $row['name'];
 
 echo json_encode([
   "status" => "success",
+  "user_id" => $row['id'],
   "email" => $email,
   "name" => $displayName,
   "profile_image" => $row['profile_image']
