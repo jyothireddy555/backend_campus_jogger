@@ -2,12 +2,12 @@ Array
 (
     [profile_image] => Array
         (
-            [name] => scaled_1000005842.webp
-            [full_path] => scaled_1000005842.webp
+            [name] => scaled_1000005819.jpg
+            [full_path] => scaled_1000005819.jpg
             [type] => application/octet-stream
-            [tmp_name] => /opt/lampp/temp/phpCDC1oJ
+            [tmp_name] => /opt/lampp/temp/php2IETqw
             [error] => 0
-            [size] => 38572
+            [size] => 41945
         )
 
 )
